@@ -1,0 +1,36 @@
+allprojects {
+    apply plugin:'java'
+    apply plugin:'idea'
+    apply plugin:'war'
+    apply plugin:'jetty'
+    repositories {
+        mavenCentral()
+    }
+}
+subprojects {
+    apply plugin:'java'
+    apply plugin:'idea'
+    apply plugin:'war'
+    apply plugin:'jetty'
+    sourceCompatibility = 1.8
+    targetCompatibility = 1.8
+    version '1.0'
+    compileJava.options.encoding = 'UTF-8'
+    task distJar(type: Jar){
+    }
+}
+
+buildscript {
+    repositories {
+        mavenCentral()
+    }
+}
+idea {
+    module {
+        inheritOutputDirs = false
+        outputDir = file("$buildDir/classes/main/")
+    }
+}
+task wrapper(type: Wrapper) {
+    gradleVersion = '2.12'
+}
